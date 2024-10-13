@@ -3,7 +3,7 @@ import './globals.css';
 import { LayoutProvider } from './layoutProvider';
 
 export const metadata: Metadata = {
-    title: 'somename',
+    title: 'Chronos',
     description: ''
 };
 

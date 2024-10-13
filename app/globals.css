@@ -10,6 +10,10 @@
     scrollbar-width: thin;
 }
 
+body {
+    @apply bg-main w-screen h-screen items-center justify-center flex;
+}
+
 a,
 img,
 button {
@@ -21,10 +25,10 @@ button {
     --bg-full-dark: #1E1E1E;
     --bg-object-dark: #292929;
 
-    --bg-full: #F5F5F5;
+    --bg-full: #f5f5f5;
     --bg-object: #dfdfdf;
 
-    --primary: #5858e6;
+    --primary: #5858e680;
     --primary-dark: #3232aa;
 
     scrollbar-width: thin;

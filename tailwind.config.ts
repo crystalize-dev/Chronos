@@ -21,6 +21,9 @@ const config = {
                     bg: 'var(--bg-full-dark)',
                     object: 'var(--bg-object-dark)'
                 }
+            },
+            backgroundImage: {
+                main: "url('/bg.jpg')"
             }
         }
     },

@@ -5,7 +5,9 @@ import { ThemeContext } from './context/ThemeContext';
 export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
     return (
         <ThemeProvider>
-            <main className="">{children}</main>
+            <main className="flex h-[90vh] w-[90vw] rounded-3xl bg-primary backdrop-blur-md">
+                {children}
+            </main>
         </ThemeProvider>
     );
 };
