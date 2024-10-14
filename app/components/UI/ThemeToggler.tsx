@@ -20,7 +20,7 @@ const ThemeToggler: React.FC<ThemeTogglerProps> = ({
                 {...props}
                 icon={theme === 'dark' ? 'moon' : 'sun'}
                 onClick={disabled ? undefined : toggleTheme}
-                className="h-5 w-5 text-black transition-all group-hover:scale-125 dark:text-white"
+                className="h-5 w-5 text-white transition-all group-hover:scale-125"
             />
         </div>
     );

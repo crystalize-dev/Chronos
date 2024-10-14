@@ -6,10 +6,10 @@ import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import { customAxios } from '@/axios/customAxios';
 
-const Login = () => {
+const RegisterPage = () => {
     const [fetching, setFetching] = useState(false);
     const router = useRouter();
 
@@ -18,34 +18,31 @@ const Login = () => {
         const formData = new FormData(e.target as HTMLFormElement);
         const email = formData.get('email') as string;
         const password = formData.get('password') as string;
+        const passwordRepeat = formData.get('passwordRepeat') as String;
 
-        if (!email || !password) {
+        if (!email || !password || !passwordRepeat) {
             toast.error('Fill in all required fields!');
             return;
         }
 
+        if (password !== passwordRepeat) {
+            toast.error('Passwords do not match!');
+            return;
+        }
+
         setFetching(true);
-        const toastId = toast.loading('Entering...');
 
         try {
-            const result = await signIn('credentials', {
-                email,
-                password,
-                redirect: false
+            await customAxios('POST', 'register', setFetching, {
+                data: { email, password },
+                actionOnSuccess: () => {
+                    router.push('login');
+                },
+                loadingString: 'Registering...',
+                successString: 'Success! Now you can log in!'
             });
-
-            if (result && result.error) {
-                toast.error(result.error);
-            } else {
-                toast.success('Success!');
-                router.push('/');
-            }
-
-            setFetching(false);
         } catch (error) {
             toast.error('Error occurred!');
-        } finally {
-            toast.dismiss(toastId);
         }
     };
 
@@ -65,7 +62,7 @@ const Login = () => {
                 />
             </div>
 
-            <h1 className="mb-4 text-4xl font-bold text-primary">Sign In</h1>
+            <h1 className="mb-4 text-4xl font-bold text-primary">Sign Up</h1>
 
             <Input
                 layoutId="emailInput"
@@ -85,7 +82,15 @@ const Login = () => {
                 placeholderType="classic"
                 placeholder="Password"
                 passwordSetup
-                forgotPassword
+                required
+            />
+
+            <Input
+                type="password"
+                name="passwordRepeat"
+                disabled={fetching}
+                placeholderType="classic"
+                placeholder="Repeat password"
                 required
             />
 
@@ -99,16 +104,16 @@ const Login = () => {
             </Button>
 
             <Link
-                href={'/register'}
+                href={'/login'}
                 className="flex gap-2 text-sm text-zinc-600 dark:text-white/70"
             >
-                Don`t have an account yet?
+                Already have an account?
                 <span className="hover:text-primary hover:underline focus:underline">
-                    Sign up
+                    Sign in
                 </span>
             </Link>
         </form>
     );
 };
 
-export default Login;
+export default RegisterPage;

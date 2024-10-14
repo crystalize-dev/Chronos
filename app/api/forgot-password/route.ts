@@ -52,9 +52,9 @@ export async function POST(req: NextRequest) {
         const mailOptions = {
             from: process.env.GMAIL_LOGIN,
             to: email,
-            subject: 'StoryHub Reset Password',
+            subject: 'Chronos Reset Password',
             html: `
-                <h1>StoryHub Reset Password</h1>
+                <h1>Chronos Reset Password</h1>
                 <p>You requested a password reset</p>
                 <p>Click this <a href="${resetURL}">${resetURL}</a> to set a new password</p>
             `

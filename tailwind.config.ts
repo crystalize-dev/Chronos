@@ -14,16 +14,19 @@ const config = {
                     dark: 'var(--primary-dark)'
                 },
                 light: {
-                    bg: 'var(--bg-full)',
-                    object: 'var(--bg-object)'
+                    bg: 'var(--bg)',
+                    object: 'var(--bg-object)',
+                    border: 'var(--border)'
                 },
                 dark: {
-                    bg: 'var(--bg-full-dark)',
-                    object: 'var(--bg-object-dark)'
+                    bg: 'var(--bg-dark)',
+                    object: 'var(--bg-object-dark)',
+                    border: ''
                 }
             },
             backgroundImage: {
-                main: "url('/bg.jpg')"
+                dark: "url('/bg.jpg')",
+                light: "url('/bg_day.jpg')"
             }
         }
     },

@@ -65,7 +65,7 @@ const Input = ({
 
     // Stylization
     const focusStyles =
-        'outline outline-2 outline-transparent focus:outline-primary-hover';
+        'outline outline-2 outline-transparent focus:outline-primary dark:focus:outline-light-border';
     const disabledStyles = 'cursor-not-allowed opacity-50';
 
     const containerClassNames = classNames(
@@ -77,7 +77,7 @@ const Input = ({
     );
 
     const inputClassNames = classNames(
-        'bg-light-bg dark:bg-dark-object h-12 w-full rounded-md p-4 !text-base transition-all',
+        'bg-light-object dark:bg-dark-object h-12 w-full rounded-md p-4 !text-base transition-all dark:text-white placeholder:text-zinc-500',
         focusStyles,
         { [disabledStyles]: disabled },
         { 'pr-10': icon },
@@ -86,23 +86,24 @@ const Input = ({
     );
 
     const linkClassNames = classNames(
-        'cursor-pointer self-end whitespace-nowrap text-zinc-500 outline-none transition-all hover:text-primary hover:underline focus:text-primary focus:underline dark:text-white/20',
+        'cursor-pointer text-zinc-500 dark:text-white/80 dark:hover:font-bold dark:focus:font-bold dark:focus:text-white dark:hover:text-white self-end whitespace-nowrap hover:text-primary outline-none transition-all hover:underline focus:underline focus:text-primary',
         { 'pointer-events-none opacity-50': disabled }
     );
 
     const iconClassNames = classNames(
-        'pointer-events-none absolute right-4 select-none text-zinc-400',
+        'pointer-events-none absolute right-4 select-none text-zinc-400 h-4 w-4',
         {
-            'top-[calc(50%-0.5rem)] -translate-y-1/2':
+            'top-[calc(50%-0.6rem)] -translate-y-1/2':
                 placeholderType === 'classic',
-            'bottom-[2.1rem]': placeholderType !== 'classic'
+            'bottom-[2.1rem]': placeholderType !== 'classic',
+            '!top-1/2': !required && !forgotPassword
         }
     );
 
     const passwordSetupClassNames = classNames(
         'absolute right-4 text-zinc-400',
         {
-            'top-[calc(50%-0.5rem)] -translate-y-1/2':
+            'top-[calc(50%-0.6rem)] -translate-y-1/2':
                 placeholderType === 'classic',
             'bottom-[2.1rem]': placeholderType !== 'classic'
         }
@@ -132,7 +133,7 @@ const Input = ({
                 className={inputClassNames}
             />
 
-            {!hidden && (
+            {!hidden && (required || forgotPassword) && (
                 <div className="-mt-1 flex w-full items-center justify-between gap-2 text-xs">
                     <p className="text-red-500">{error}</p>
                     {forgotPassword && (

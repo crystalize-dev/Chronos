@@ -3,13 +3,11 @@ import { IconType, icons } from './icon-database';
 
 interface IconProps extends React.HTMLAttributes<SVGSVGElement> {
     icon: IconType;
-    fill?: string;
     weight?: 'normal' | 'bold' | 'thin';
 }
 
 const Icon: React.FC<IconProps> = ({
     icon,
-    fill = 'none',
     className = '',
     weight = 'normal',
     ...props
@@ -25,7 +23,7 @@ const Icon: React.FC<IconProps> = ({
         <svg
             {...props}
             xmlns="http://www.w3.org/2000/svg"
-            fill={fill}
+            fill={'transparent'}
             viewBox="0 0 24 24"
             strokeWidth={weightMapping[weight]}
             stroke="currentColor"
